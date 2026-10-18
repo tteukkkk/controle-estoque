@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, init
+ial-scale=1.0">
+    <title>Histórico de Movimentações</title>
+</head>
+
+<body>
+    <h1>Histórico de Movimentações</h1>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Tipo</th>
+                <th>Quantidade</th>
+                <th>Data da movimentação</th>
+                <th>Responsável</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movimento in movimentacoes %}
+            <tr>
+                <td>{{ movimento.produto.nome }}</td>
+                <td>{{ movimento.get_tipo_display }}</td>
+                <td>{{ movimento.quantidade }}</td>
+                <td>{{ movimento.data_movimentacao|date:"d/m/Y"
+                    }}</td>
+                <td>{% if movimento.usuario.get_full_name %}{{
+                    movimento.usuario.get_full_name }}{% else %}{{ movimento.us
+                    uario.username }}{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhuma movimentação registrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{% url 'movimentar' %}">Nova movimentação</a><br>
+    <br>
+        <a href="{% url 'principal' %}">Voltar ao menu principal</a>
+</body>
+</html>

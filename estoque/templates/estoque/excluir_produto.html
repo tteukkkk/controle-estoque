@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, init
+ial-scale=1.0">
+    <title>Excluir Produto</title>
+</head>
+
+<body>
+    <h1>Excluir Produto</h1>
+    <p>Tem certeza de que deseja excluir o produto <strong>{{ p
+            roduto.nome }}</strong>?</p>
+    <p>Esta operação só será concluída se o produto não possuir
+        movimentações protegidas no histórico.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar exclusão</button>
+    </form>
+    <br>
+    <a href="{% url 'produtos' %}">Cancelar</a>
+</body>
+
+</html>

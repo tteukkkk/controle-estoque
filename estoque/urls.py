@@ -1,0 +1,50 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path(
+        '',
+        views.login_usuario,
+        name='login'
+    ),
+    path(
+        'logout/',
+        views.logout_usuario,
+        name='logout'
+    ),
+    path(
+        'principal/',
+        views.principal,
+        name='principal'
+    ),
+    path(
+        'produtos/',
+        views.produtos,
+        name='produtos'
+    ),
+    path(
+        'produtos/cadastrar/',
+        views.cadastrar_produto,
+        name='cadastrar_produto'
+    ),
+    path(
+        'produtos/<int:id>/editar/',
+        views.editar_produto,
+        name='editar_produto'
+    ),
+    path(
+        'produtos/<int:id>/excluir/',
+        views.excluir_produto,
+        name='excluir_produto'
+    ),
+    path(
+        'estoque/',
+        views.movimentar,
+        name='movimentar'
+    ),
+    path(
+        'historico/',
+        views.historico,
+        name='historico'
+    ),
+]

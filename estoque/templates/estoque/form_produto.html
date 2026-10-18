@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto</title>
+</head>
+<body>
+<h1>{% if form.instance.pk %}Editar Produto{% else %}Cadastrar Produto{% endif %}</h1>
+{% for message in messages %}<p>{{ message }}</p>{% endfor %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.errors %}
+                {% for error in field.errors %}<br><strong>{{ error }}</strong>{% endfor %}
+            {% endif %}
+        </p>
+    {% endfor %}
+    <button type="submit">Salvar</button>
+</form>
+<br>
+<a href="{% url 'produtos' %}">Cancelar e voltar</a>
+</body>
+</html>

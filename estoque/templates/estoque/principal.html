@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+</head>
+
+<body>
+    <h1>Controle de Estoque</h1>
+    <p>
+        Bem-vindo,
+        <strong>
+            {{ request.user.username }}
+        </strong>
+    </p>
+    <a href="{% url 'produtos' %}">
+        Cadastro de Produtos
+    </a>
+    <br><br>
+    <a href="{% url 'movimentar' %}">
+        Gestão de Estoque
+    </a>
+    <br><br>
+    <a href="{% url 'historico' %}">
+        Histórico
+    </a>
+    <br><br>
+    <a href="{% url 'logout' %}">
+        Sair
+    </a>
+</body>
+
+</html>

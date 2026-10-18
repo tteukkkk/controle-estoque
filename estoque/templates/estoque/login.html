@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Sistema de Estoque</h1>
+    <h2>Login</h2>
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Usuário:</label>
+        <input type="text" name="username" required>
+        <br><br>
+        <label>Senha:</label>
+        <input type="password" name="password" required>
+        <br><br>
+        <button type="submit">
+            Entrar
+        </button>
+    </form>
+</body>
+
+</html>

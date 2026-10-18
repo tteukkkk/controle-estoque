@@ -1,0 +1,57 @@
+<h1>Produtos</h1>
+<a href="{% url 'cadastrar_produto' %}">
+    Novo produto
+</a>
+<form method="GET">
+    <input type="text" name="busca" value="{{ busca|default:'' }}" placeholder="Pesquisar produto"><button
+        type="submit">
+        Pesquisar
+    </button>
+</form>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Unidade</th>
+            <th>Estoque</th>
+            <th>Mínimo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+        <tr>
+            <td>
+                {{ produto.nome }}
+            </td>
+            <td>
+                {{ produto.get_unidade_medida_display }}
+            </td>
+            <td>
+                {{ produto.estoque_atual }}
+            </td>
+            <td>
+                {{ produto.estoque_minimo }}
+            </td>
+            <td>
+                <a href="{% url 'editar_produto' produto.id%}">
+                    Editar
+                </a>
+                <a href="{% url 'excluir_produto' produto.id %}">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">
+                Nenhum produto encontrado.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href="{% url 'principal' %}">
+    Voltar
+</a>

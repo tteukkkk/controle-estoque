@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, init
+ial-scale=1.0">
+    <title>Gestão de Estoque</title>
+</head>
+
+<body>
+    <h1>Gestão de Estoque</h1>
+    {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+    <h2>Registrar movimentação</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.errors %}
+            {% for error in field.errors %}<br><strong>
+                {{ error }}</strong>{% endfor %}
+            {% endif %}
+        </p>
+        {% endfor %}
+        <button type="submit">Registrar movimentação</button>
+    </form>
+    <h2>Produtos em estoque</h2>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Unidade</th>
+                <th>Estoque atu
+                    al</th>
+                <th>Estoque mínimo</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.get_unidade_medida_display }}</t d>
+                <td>{{ produto.estoque_atual }}</td>
+                <td>{{ produto.estoque_minimo }}</td>
+                <td>{% if produto.estoque_atual < produto.estoque_minimo %}Estoque baixo{% else %}Estoque normal{%endif %}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhum produto cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{% url 'historico' %}">Ver histórico</a><br><br>
+    <a href="{% url 'principal' %}">Voltar ao menu principal</a>
+</body>
+
+</html>
